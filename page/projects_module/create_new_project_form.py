@@ -6,6 +6,8 @@ import datetime
 import pytz
 import time
 
+from util import utility
+
 
 raw_date= str(datetime.datetime.now(pytz.timezone('Asia/Jakarta')))
 date = raw_date[0:-13]
@@ -41,17 +43,25 @@ class CreateNewProject():
     hourly_rate_cost = "au.geekseat.com.hub3candroid:id/edit_hourly_cost"
     is_project_owner = "au.geekseat.com.hub3candroid:id/check_owner"
     add_team_member_button = "au.geekseat.com.hub3candroid:id/button_save"
-
     team_member_hourly_validation = "android:id/message"
+
+    project_creator_option = "//*[@resource-id='au.geekseat.com.hub3candroid:id/ib_action_more' and ./parent::*[@class='android.widget.RelativeLayout'] and ./preceding-sibling::*[./*[./*[./*[@text='John Doe']]]]]"
+
+    # //*[@resource-id='au.geekseat.com.hub3candroid:id/ib_action_more' and ./parent::*[@class='android.widget.RelativeLayout'] and ./preceding-sibling::*[./*[./*[./*[@text='John Doe']]]]]
+    # (//*[@id='rv_team_project']/*/*[@id='ib_action_more'])[1]
+
     yes_button = "android:id/button1"
     no_button = "android:id/button2"
+    popup_edit = "au.geekseat.com.hub3candroid:id/btn_edit"
 
     ''' activity section '''
 
     add_activity_title = "//*[@text='New Project: Add Activities']"
+    activity_subject = "au.geekseat.com.hub3candroid:id/et_subject"
     activity_description = "au.geekseat.com.hub3candroid:id/et_description"
     activity_type = "au.geekseat.com.hub3candroid:id/spinner_activity_type"
     schedule_start = "au.geekseat.com.hub3candroid:id/et_date_start"
+    is_billible = "au.geekseat.com.hub3candroid:id/switch_is_billable"
     complete_button = "au.geekseat.com.hub3candroid:id/ms_stepCompleteButton"
     save_activity = "au.geekseat.com.hub3candroid:id/btn_add"
     cancel = "au.geekseat.com.hub3candroid:id/btn_cancel"
@@ -59,13 +69,15 @@ class CreateNewProject():
 
     def __init__(self, driver):
         self.driver = driver
+        self.util = utility.Helper(driver=self.driver)
 
     def verified_form(self):
         try:
-            WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, self.form_title)))
+            WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.XPATH, self.form_title)))
             WebDriverWait(self.driver, 2).until(ec.presence_of_element_located((By.ID, self.project_name)))
+            print("Create project is Ready")
         except TimeoutException:
-            print("element not ready")
+            print("Create project not ready")
 
     def input_project_title(self):
         self.driver.find_element_by_id(self.project_name).send_keys("Appium Project {}".format(date))
@@ -84,11 +96,11 @@ class CreateNewProject():
         #//*[@contentDescription='2018']
         self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
 
-    def swipe_to_buttom(self):
+    def swipe_long(self):
 
         # y2 = 200 for 768x1280 screen, for smaller screen use higher value
         try:
-            self.driver.swipe(522, 800, 495, 200, 1000)
+            self.driver.swipe(522, 800, 495, 100, 1000)
         except :
             print("swipe sukses")
 
@@ -100,14 +112,12 @@ class CreateNewProject():
         print("tap complete")
         self.driver.find_element_by_id(self.complete_button).click()
 
-
     def handle_team_member_validation(self):
         try:
             WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, self.team_member_hourly_validation)))
             self.driver.find_element_by_id(self.yes_button).click()
         except TimeoutException:
             print("No hourly rate warning")
-
 
     def handle_activity_validation(self):
         try:
@@ -116,31 +126,79 @@ class CreateNewProject():
         except TimeoutException:
             print("No hourly rate warning")
 
-
     def input_team_member_name(self):
         try:
-            WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, self.team_member_sec_title)))
+            WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.XPATH, self.team_member_sec_title)))
             print("Add team member page is ready")
         except TimeoutException:
-            print("Something when wrong")
+            print("Team member page not ready")
         team_member_name = self.driver.find_element_by_id(self.team_member_name)
         team_member_name.send_keys("Jova")
-        ''' using coordinate somehow not working so i tried to tap element in behind'''
-        # x = team_member_name.location['x']
-        # y = team_member_name.location['y']
-        # height = team_member_name.size['height']
-        # width = team_member_name.size['width']
-        # time.sleep(2)
-        # suggestion_cord = []
-        # suggestion_cord.append((x, y+height+40))
-        # suggestion_cord.append((x+(int(width/2)), y+height+50))
-        # print(suggestion_cord)
-        # self.driver.tap(suggestion_cord)
-        self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/title").click()
+        self.util.tap_first_result_auto_complete(team_member_name)
+        # self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/title").click()
 
     def set_project_role(self):
         self.driver.find_element_by_id(self.project_role).send_keys("Tester")
 
+    def set_hourly_rate(self):
+        charge = self.driver.find_element_by_id(self.hourly_rate_charge)
+        charge.clear()
+        charge.send_keys("999")
+        cost = self.driver.find_element_by_id(self.hourly_rate_cost)
+        cost.clear()
+        cost.send_keys("999")
+
+    def tap_option_team_member(self):
+        # try:
+        #     WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.XPATH, self.project_creator_option)))
+        # except TimeoutException:
+        #     print("more option can't be located")
+
+        self.driver.find_element_by_xpath(self.project_creator_option).click()
+
+    def tap_popup_edit(self):
+        try:
+            WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, self.popup_edit)))
+        except TimeoutException:
+            print("pop up not appear")
+
+        self.driver.find_element_by_id(self.popup_edit).click()
+
     def tap_add_member_button(self):
         self.driver.find_element_by_id(self.add_team_member_button).click()
+        time.sleep(2)
+
+    def input_activity_subject(self):
+        try:
+            WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.XPATH, self.add_activity_title)))
+        except TimeoutException:
+            print("activity section is not ready")
+
+        self.driver.find_element_by_id(self.activity_subject).send_keys("Activty 1")
+
+    def input_activity_description(self):
+        self.driver.find_element_by_id(self.activity_description).send_keys("Activity Description")
+
+    def select_activity_type(self):
+        activity_type = self.driver.find_element_by_id(self.activity_type)
+        activity_type.click()
+        self.util.tap_first_result_auto_complete(activity_type)
+        time.sleep(1)
+
+    def set_schedule_start(self):
+        self.driver.find_element_by_id(self.schedule_start).click()
+        time.sleep(1)
+        self.driver.find_element_by_xpath("//*[@text='2018']").click()
+        #//*[@contentDescription='2018']
+        self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
+
+    def set_is_billible(self):
+        self.driver.find_element_by_id(self.is_billible).click()
+
+    def tap_save_activity(self):
+        self.driver.find_element_by_id(self.save_activity).click()
+
+
+
+
 
