@@ -96,14 +96,6 @@ class CreateNewProject():
         #//*[@contentDescription='2018']
         self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
 
-    def swipe_long(self):
-
-        # y2 = 200 for 768x1280 screen, for smaller screen use higher value
-        try:
-            self.driver.swipe(522, 800, 495, 100, 1000)
-        except :
-            print("swipe sukses")
-
     def tap_next(self):
         print("next")
         self.driver.find_element_by_id(self.next).click()
@@ -126,15 +118,15 @@ class CreateNewProject():
         except TimeoutException:
             print("No hourly rate warning")
 
-    def input_team_member_name(self):
+    def input_team_member_name(self, teamm_ember_name):
         try:
             WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.XPATH, self.team_member_sec_title)))
             print("Add team member page is ready")
         except TimeoutException:
             print("Team member page not ready")
-        team_member_name = self.driver.find_element_by_id(self.team_member_name)
-        team_member_name.send_keys("Jova")
-        self.util.tap_first_result_auto_complete(team_member_name)
+        team_member_name_el = self.driver.find_element_by_id(self.team_member_name)
+        team_member_name_el.send_keys(teamm_ember_name)
+        self.util.tap_first_result_auto_complete(team_member_name_el)
         # self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/title").click()
 
     def set_project_role(self):
@@ -197,6 +189,10 @@ class CreateNewProject():
 
     def tap_save_activity(self):
         self.driver.find_element_by_id(self.save_activity).click()
+
+    def set_is_project_owner(self):
+        self.driver.find_element_by_id(self.is_project_owner).click()
+
 
 
 

@@ -27,12 +27,23 @@ class ProjectList():
     completed_list = "//*[@text='COMPLETED']"
     archived_list = "//*[@text='ARCHIVED']"
     restore_button = "au.geekseat.com.hub3candroid:id/textDueDate"
+    el_edit_project_id = "au.geekseat.com.hub3candroid:id/btn_edit"
+    el_delete_project_id = "au.geekseat.com.hub3candroid:id/btn_delete"
 
     def __init__(self, driver):
         self.driver = driver
 
     def tap_create_new_project(self):
-        time.sleep(3)
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.create_project)))
+        except TimeoutException:
+            print("Create project not ready")
         self.driver.find_element_by_id(self.create_project).click()
+
+    def tap_option_for_project(self):
+        self.driver.find_element_by_id(self.more_action).click()
+
+    def tap_edit_button(self):
+        self.driver.find_element_by_id().click()
 
 
