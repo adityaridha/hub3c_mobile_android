@@ -1,5 +1,4 @@
 import sys
-import os
 import pytest
 import time
 from pathlib import Path
@@ -10,15 +9,15 @@ import page
 from connection import Connection
 from util import utility
 
-directory = '%s/' % os.getcwd()
-
 driver = Connection.driver
+
 login = page.Login(driver)
 dashboard = page.Dashboard(driver)
 navbar = page.Navbar(driver)
 feature_menu = page.Feature(driver)
 project = page.ProjectList(driver)
 create_project = page.CreateNewProject(driver)
+edit_project = page.EditProject(driver)
 util = utility.Helper(driver)
 
 @pytest.mark.usefixtures("reset_app")
@@ -45,7 +44,7 @@ class TestProject():
         feature_menu.tap_projects()
         project.tap_create_new_project()
 
-        # ############################################### input basic information
+        ### ############### input basic information
         create_project.verified_form()
         create_project.input_project_title()
         create_project.input_project_code()
@@ -55,7 +54,7 @@ class TestProject():
         util.swipe_to_buttom()
         create_project.tap_next()
 
-        # ############################################### Add team member project
+        ### ############### Add team member project
         create_project.input_team_member_name(teamm_ember_name="Aditya Ridha")
         create_project.set_project_role()
         create_project.set_hourly_rate()
@@ -68,10 +67,11 @@ class TestProject():
         create_project.tap_add_member_button()
         create_project.tap_next()
 
-        # ############################################### Add project activity
+        ### ############### Add project activity
         create_project.tap_complete()
         create_project.handle_activity_validation()
 
+    # @pytest.mark.skip
     def test_create_project_all_form_filled(self):
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
@@ -79,7 +79,7 @@ class TestProject():
         feature_menu.tap_projects()
         project.tap_create_new_project()
 
-        # ############################################### input basic information
+        ### ############### input basic information
         create_project.verified_form()
         create_project.input_project_title()
         create_project.input_project_code()
@@ -89,7 +89,7 @@ class TestProject():
         util.swipe_to_buttom()
         create_project.tap_next()
 
-        # ############################################### Add team member project
+        ### ############### Add team member project
         create_project.input_team_member_name(teamm_ember_name="Jovan")
         create_project.set_project_role()
         create_project.set_hourly_rate()
@@ -102,7 +102,7 @@ class TestProject():
         create_project.tap_add_member_button()
         create_project.tap_next()
 
-        # ############################################### Add project activity
+        ### ############### Add project activity
         create_project.input_activity_subject()
         create_project.input_activity_description()
         create_project.select_activity_type()
@@ -121,7 +121,7 @@ class TestProject():
         feature_menu.tap_projects()
         project.tap_create_new_project()
 
-        # ############################################### input basic information
+        ### ############### input basic information
         create_project.verified_form()
         create_project.input_project_title()
         create_project.input_project_code()
@@ -131,7 +131,7 @@ class TestProject():
         util.swipe_to_buttom()
         create_project.tap_next()
 
-        # ############################################### Add team member project
+        ### ############### Add team member project
         create_project.input_team_member_name(teamm_ember_name="Jovan")
         create_project.set_project_role()
         create_project.set_hourly_rate()
@@ -145,7 +145,7 @@ class TestProject():
         create_project.tap_add_member_button()
         create_project.tap_next()
 
-        # ############################################### Add project activity
+        ### ############### Add project activity
         create_project.input_activity_subject()
         create_project.input_activity_description()
         create_project.select_activity_type()
@@ -157,14 +157,34 @@ class TestProject():
         create_project.tap_save_activity()
         create_project.tap_complete()
 
+
     def test_edit_project(self):
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
         navbar.tap_feature_menu()
         feature_menu.tap_projects()
+        project.tap_option_for_project()
+        project.tap_edit_button()
+        edit_project.edit_project_name()
+        edit_project.edit_project_code()
+        edit_project.edit_project_description()
+        edit_project.edit_currency()
+        edit_project.edit_project_status()
+        edit_project.edit_proposed_end()
+        util.swipe_to_buttom()
+        # edit_project.edit_fixed_price_amount()
+        edit_project.save_edit_project()
+
 
     def test_delete_project(self):
-        pass
+        login.login(email="transsystem@mailinator.com", password="ZXasqw12")
+        dashboard.verified_all_element()
+        navbar.tap_feature_menu()
+        feature_menu.tap_projects()
+        project.tap_option_for_project()
+        project.tap_delete_button()
+        project.proceed_delete_action()
+        project.verified_delete_project()
 
     def test_search_project(self):
         pass

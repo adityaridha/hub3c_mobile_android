@@ -1,6 +1,5 @@
 from appium import webdriver
 
-
 class Connection():
 
     desired_caps = {}
@@ -13,4 +12,6 @@ class Connection():
     desired_caps['noReset'] = False
     desired_caps['automationName'] = 'uiautomator2'
     desired_caps['appiumVersion'] = '1.6.5'
+
+
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)

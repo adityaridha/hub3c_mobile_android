@@ -7,9 +7,6 @@ import pytest
 import time
 
 
-
-
-
 class ProjectList():
 
     create_project = "au.geekseat.com.hub3candroid:id/fab"  # generic floating button id
@@ -29,6 +26,9 @@ class ProjectList():
     restore_button = "au.geekseat.com.hub3candroid:id/textDueDate"
     el_edit_project_id = "au.geekseat.com.hub3candroid:id/btn_edit"
     el_delete_project_id = "au.geekseat.com.hub3candroid:id/btn_delete"
+    el_del_confirmation = "//*[@text='Deleting project will remove this project from list and turn off all notification. Do you want to continue?']"
+    el_yes_button_for_delete_id = "android:id/button1"
+    crouton_successfull_delete = "//*[@text='Project is successfully deleted']"
 
     def __init__(self, driver):
         self.driver = driver
@@ -41,9 +41,40 @@ class ProjectList():
         self.driver.find_element_by_id(self.create_project).click()
 
     def tap_option_for_project(self):
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.more_action)))
+        except TimeoutException:
+            print("Project not ready")
         self.driver.find_element_by_id(self.more_action).click()
 
     def tap_edit_button(self):
-        self.driver.find_element_by_id().click()
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.el_edit_project_id)))
+        except TimeoutException:
+            print("Create project not ready")
+        self.driver.find_element_by_id(self.el_edit_project_id).click()
+
+    def tap_delete_button(self):
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.el_delete_project_id)))
+        except TimeoutException:
+            print("Create project not ready")
+        self.driver.find_element_by_id(self.el_delete_project_id).click()
+
+    def proceed_delete_action(self):
+        try :
+            WebDriverWait(self.driver,10).until(ec.presence_of_element_located((By.XPATH,self.el_del_confirmation)))
+            self.driver.find_element_by_id(self.el_yes_button_for_delete_id).click()
+        except TimeoutException:
+            print("Delete confirmation not appear")
+            pytest.fail()
+
+    def verified_delete_project(self):
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.XPATH, self.crouton_successfull_delete)))
+            print("Deletion success")
+        except TimeoutException:
+            print("Delete failed")
+            pytest.fail()
 
 

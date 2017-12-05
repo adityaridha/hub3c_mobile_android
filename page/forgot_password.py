@@ -18,6 +18,6 @@ class ForgotPassword():
 
     def input_email(self):
         self.driver.find_element_by_id(self.email).send_keys("tony.stark@mailinator.com")
-
-    def tap_get_reset_link(self):
-
+    #
+    # def tap_get_reset_link(self):
+    #

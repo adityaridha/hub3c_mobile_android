@@ -91,7 +91,7 @@ class CreateNewProject():
     def set_reminder_date(self):
         self.driver.find_element_by_id(self.reminder_date).click()
         time.sleep(1)
-        self.driver.find_element_by_xpath("//*[@text='2018']").click()
+        self.driver.find_element_by_xpath("//*[@text='2018']").click() #harus diganti locator nya
 
         #//*[@contentDescription='2018']
         self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
@@ -101,15 +101,24 @@ class CreateNewProject():
         self.driver.find_element_by_id(self.next).click()
 
     def tap_complete(self):
-        print("tap complete")
+        try:
+            WebDriverWait(self.driver,10).until(ec.presence_of_element_located((By.ID, self.complete_button)))
+            print("Complete button detected")
+        except TimeoutException:
+            print("no complete button")
+
         self.driver.find_element_by_id(self.complete_button).click()
+        print("tap complete")
+
 
     def handle_team_member_validation(self):
         try:
             WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, self.team_member_hourly_validation)))
-            self.driver.find_element_by_id(self.yes_button).click()
+            print("hourly rate warning")
         except TimeoutException:
             print("No hourly rate warning")
+
+        self.driver.find_element_by_id(self.yes_button).click()
 
     def handle_activity_validation(self):
         try:

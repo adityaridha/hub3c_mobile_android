@@ -1,6 +1,6 @@
 
 ''' team member '''
-add team member = au.geekseat.com.hub3candroid:id/fab
-prof pict = au.geekseat.com.hub3candroid:id/thumbnail
-search = au.geekseat.com.hub3candroid:id/action_search
-back button dari profile = android.widget.ImageButton (class)
+el_add_team_member = "au.geekseat.com.hub3candroid:id/fab"
+el_prof_pict = "au.geekseat.com.hub3candroid:id/thumbnail"
+el_search = "au.geekseat.com.hub3candroid:id/action_search"
+el_back_button = "android.widget.ImageButton (class)"

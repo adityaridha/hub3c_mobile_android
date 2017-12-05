@@ -24,4 +24,12 @@ class Activity():
     more_activity_name = "au.geekseat.com.hub3candroid:id/text_tittle"
     more_alert_me = "au.geekseat.com.hub3candroid:id/btn_edit"
     more_mark_complete = "au.geekseat.com.hub3candroid:id/btn_complete"
-    more_delete = "au.geekseat.com.hub3candroid:id/btn_delete"
+    el_more_delete_id = "au.geekseat.com.hub3candroid:id/btn_delete"
+
+    def __init__(self, driver):
+        self.driver = driver
+        self.util = utility.Helper(driver=self.driver)
+
+    def delete_activity(self):
+        self.driver.find_element_by_id(self.el_more_delete_id).click()
+
