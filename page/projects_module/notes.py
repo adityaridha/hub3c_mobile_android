@@ -13,6 +13,7 @@ class Notes():
     notes_save_button = "au.geekseat.com.hub3candroid:id/btn_save_note"
     search_textfield = "android:id/search_src_text"
     notes_poster = "au.geekseat.com.hub3candroid:id/tv_name"
+    notes_you = "au.geekseat.com.hub3candroid:id/tv_is_that_you"
     notes_poster_picture = "(//*[@id='rv_notes_project']/*/*/*[@class='android.widget.ImageView' and @width>0 and @height>0 and ./following-sibling::*[./*[@id='tv_name']]])[1]"
     notes_time = "au.geekseat.com.hub3candroid:id/tv_time"
     notes_title = "au.geekseat.com.hub3candroid:id/tv_subject_note"

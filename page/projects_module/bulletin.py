@@ -20,3 +20,7 @@ class Bulletin():
     bulletin_comment_button = "au.geekseat.com.hub3candroid:id/iv_comment"
     bulletin_comment_total = "au.geekseat.com.hub3candroid:id/tv_comment"
     load_more_button = "au.geekseat.com.hub3candroid:id/btn_view_all"
+
+    '''edit bulletin'''
+    bulletin_textbox_edit = "au.geekseat.com.hub3candroid:id/edit_text"
+    bulletin_save_button = "au.geekseat.com.hub3candroid:id/button_save"
