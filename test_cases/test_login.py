@@ -25,13 +25,13 @@ switch_account = page.SwitchAccount(driver)
 @pytest.mark.usefixtures("reset_app")
 class TestLogin():
 
-    # def test_login_wrong_password(self):
-    #     driver.launch_app()
-    #     login.input_email("transsystem@mailinator.com")
-    #     login.input_password("this is password")
-    #     login.tap_sign_in()
-    #     time.sleep(2)
-    #     driver.save_screenshot(directory+"wrong_password.png")
+    def test_login_wrong_password(self):
+        driver.launch_app()
+        login.input_email("transsystem@mailinator.com")
+        login.input_password("this is password")
+        login.tap_sign_in()
+        time.sleep(2)
+        driver.save_screenshot(directory+"wrong_password.png")
     #
     # def test_login_failed3x(self):
     #     driver.launch_app()
@@ -64,15 +64,15 @@ class TestLogin():
     #     feature_menu.tap_header()
     #     user_profile.tap_logout()
 
-    def test_forgot_password(self):
-        driver.launch_app()
-        login.tap_forgot_password()
-        time.sleep(3)
-
-    def test_registration(self):
-        driver.launch_app()
-        login.tap_registration()
-        time.sleep(2)
+    # def test_forgot_password(self):
+    #     driver.launch_app()
+    #     login.tap_forgot_password()
+    #     time.sleep(3)
+    #
+    # def test_registration(self):
+    #     driver.launch_app()
+    #     login.tap_registration()
+    #     time.sleep(2)
 
 
 
