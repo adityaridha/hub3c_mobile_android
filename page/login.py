@@ -10,7 +10,7 @@ class Login():
 
     username_id = 'au.geekseat.com.hub3candroid:id/textUsername'
     password_id = 'au.geekseat.com.hub3candroid:id/textPassword'
-    sign_in_button = 'au.geekseat.com.hub3candroid:id/buttonLogin'
+    sign_in_button = 'au.geekseat.com.hub3candroid:id/buttonLogind'
     register_forgot_password = "au.geekseat.com.hub3candroid:id/textForgotPassword"
 
 

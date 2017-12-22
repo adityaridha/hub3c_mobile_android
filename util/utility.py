@@ -13,7 +13,8 @@ success_screenshot_dir = parent_directory + "\\test_screenshot\\success_screensh
 
 now = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
-class Helper():
+
+class Helper:
 
     def __init__(self, driver):
         self.driver = driver
