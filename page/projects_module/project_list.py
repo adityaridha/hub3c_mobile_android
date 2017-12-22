@@ -23,7 +23,6 @@ class ProjectList():
     cancelled_list = "//*[@text='CANCELLED']"
     completed_list = "//*[@text='COMPLETED']"
     archived_list = "//*[@text='ARCHIVED']"
-    restore_button = "au.geekseat.com.hub3candroid:id/textDueDate"
     el_edit_project_id = "au.geekseat.com.hub3candroid:id/btn_edit"
     el_delete_project_id = "au.geekseat.com.hub3candroid:id/btn_delete"
     el_del_confirmation = "//*[@text='Deleting project will remove this project from list and turn off all notification. Do you want to continue?']"
@@ -51,14 +50,14 @@ class ProjectList():
         try:
             WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.el_edit_project_id)))
         except TimeoutException:
-            print("Create project not ready")
+            print("Edit project not ready")
         self.driver.find_element_by_id(self.el_edit_project_id).click()
 
     def tap_delete_button(self):
         try:
             WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.el_delete_project_id)))
         except TimeoutException:
-            print("Create project not ready")
+            print("Delete project not ready")
         self.driver.find_element_by_id(self.el_delete_project_id).click()
 
     def proceed_delete_action(self):
@@ -72,7 +71,7 @@ class ProjectList():
     def verified_delete_project(self):
         try:
             WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.XPATH, self.crouton_successfull_delete)))
-            print("Deletion success")
+            print("Delete success")
         except TimeoutException:
             print("Delete failed")
             pytest.fail()

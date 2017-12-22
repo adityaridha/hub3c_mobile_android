@@ -27,7 +27,7 @@ class EditProject():
     el_billing_type_id = "au.geekseat.com.hub3candroid:id/spinner_billing_type"
     el_fixed_price_amount_id = "au.geekseat.com.hub3candroid:id/edit_fixed_amount"
     el_save_buton_id = "au.geekseat.com.hub3candroid:id/btn_add"
-    el_cancel_button_id = "au.geekseat.com.hub3candroid:id/btn_add"
+    el_cancel_button_id = "au.geekseat.com.hub3candroid:id/btn_cancel"
 
     def __init__(self, driver):
         self.driver = driver
