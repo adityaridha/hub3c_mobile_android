@@ -69,7 +69,7 @@ class CreateNewProject():
 
     def __init__(self, driver):
         self.driver = driver
-        self.util = utility.Helper(driver=self.driver)
+        self.util = utility.StepHelper(self.driver)
 
     def verified_form(self):
         try:

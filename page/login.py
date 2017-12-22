@@ -2,20 +2,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from util import StepHelper
 import pytest
 
 
 
 class Login():
 
-    username_id = 'au.geekseat.com.hub3candroid:id/textUsername'
-    password_id = 'au.geekseat.com.hub3candroid:id/textPassword'
-    sign_in_button = 'au.geekseat.com.hub3candroid:id/buttonLogind'
+    username_id = (By.ID, 'au.geekseat.com.hub3candroid:id/textUsername')
+    password_id = (By.ID, 'au.geekseat.com.hub3candroid:id/textPassword')
+    sign_in_button = (By.ID, 'au.geekseat.com.hub3candroid:id/buttonLogin')
     register_forgot_password = "au.geekseat.com.hub3candroid:id/textForgotPassword"
+    hub3c_logo = (By.CLASS_NAME, "android.widget.ImageView")
 
 
     def __init__(self, driver):
         self.driver = driver
+        self.step_helper = StepHelper(driver)
 
     def verified_all_element(self):
         try:
@@ -27,13 +30,13 @@ class Login():
     def login(self, email, password):
         self.driver.launch_app()
         try:
-            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.username_id)))
+           logo = WebDriverWait(self.driver, 10).until(ec.presence_of_element_located(self.username_id))
         except TimeoutException:
             print("element not ready")
 
-        self.driver.find_element_by_id(self.username_id).send_keys(email)
-        self.driver.find_element_by_id(self.password_id).send_keys(password)
-        self.driver.find_element_by_id(self.sign_in_button).click()
+        self.step_helper.find_element(self.username_id).send_keys(email)
+        self.step_helper.find_element(self.password_id).send_keys(password)
+        self.step_helper.find_element(self.sign_in_button).click()
 
     def input_email(self, email):
         try:

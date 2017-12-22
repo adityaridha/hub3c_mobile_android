@@ -18,7 +18,7 @@ feature_menu = page.Feature(driver)
 project = page.ProjectList(driver)
 create_project = page.CreateNewProject(driver)
 edit_project = page.EditProject(driver)
-util = utility.Helper(driver)
+util = utility.StepHelper(driver)
 
 @pytest.mark.usefixtures("reset_app")
 class TestProject():

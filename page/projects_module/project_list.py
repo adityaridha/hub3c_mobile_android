@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from appium import webdriver
+from util import StepHelper
 import pytest
 import time
 
@@ -17,7 +18,7 @@ class ProjectList():
     search_project = "au.geekseat.com.hub3candroid:id/action_search"
     back_to_dashboard = "//*[@contentDescription='Navigate up']"
     team_member_info = "(//*[@id='memberContainer']/*[@class='android.widget.ImageView' and @width>0])[1]"
-    in_progress_list = "//*[@text='IN PROGRESS']"
+    in_progress_list = (By.XPATH, "//*[@text='IN PROGRESS']" )
     not_yet_started_list = "//*[@text='NOT YET STARTED']"
     on_hold_list = "//*[@text='ON HOLD']"
     cancelled_list = "//*[@text='CANCELLED']"
@@ -29,9 +30,20 @@ class ProjectList():
     el_del_confirmation = "//*[@text='Deleting project will remove this project from list and turn off all notification. Do you want to continue?']"
     el_yes_button_for_delete_id = "android:id/button1"
     crouton_successfull_delete = "//*[@text='Project is successfully deleted']"
+    project_title = (By.ID, "au.geekseat.com.hub3candroid:id/title")
 
     def __init__(self, driver):
         self.driver = driver
+        self.step_helper = StepHelper(driver)
+
+    def verify_success_access_project(self):
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.create_project)))
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located(self.in_progress_list))
+            print("Success accessing project module")
+        except TimeoutException:
+            print("Project page is not ready")
+
 
     def tap_create_new_project(self):
         try:
@@ -76,5 +88,12 @@ class ProjectList():
         except TimeoutException:
             print("Delete failed")
             pytest.fail()
+
+    def tap_project_title(self):
+
+        title = self.step_helper.find_element(self.project_title)
+        title.click()
+
+
 
 

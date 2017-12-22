@@ -31,7 +31,7 @@ class EditProject():
 
     def __init__(self, driver):
         self.driver = driver
-        self.util = utility.Helper(driver=self.driver)
+        self.util = utility.StepHelper(driver=self.driver)
 
     def edit_project_name(self):
         try:
