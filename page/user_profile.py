@@ -2,11 +2,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from appium import webdriver
+from page.base_page import Page
 import pytest
 
 
-class UserProfile():
+class UserProfile(Page):
 
 
     logout = "au.geekseat.com.hub3candroid:id/buttonLogout"
@@ -14,8 +14,8 @@ class UserProfile():
     edit = "au.geekseat.com.hub3candroid:id/action_edit"
     back = "//*[@contentDescription='Navigate up']"
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        super().__init__()
 
     def verified_all_element(self):
         try:

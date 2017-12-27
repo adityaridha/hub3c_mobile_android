@@ -1,25 +1,17 @@
 from connection import Connection
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException
 import pytest
 
-con = Connection()
 
 
 class Page(object):
 
-    app_package = con.capabilities['appPackage']
-    _driver = con.driver()
+    driver = Connection.driver
 
     def __init__(self):
         pass
-
-    @property
-    def driver(self):
-        print("restart ?")
-        return self._driver
 
     def find_element(self, element, time_out=10):
         try:

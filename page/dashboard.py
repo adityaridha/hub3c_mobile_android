@@ -1,9 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from selenium.common.exceptions import TimeoutException
+from page.base_page import Page
 
-class Dashboard():
+class Dashboard(Page):
 
 
     notif = "au.geekseat.com.hub3candroid:id/notification_counter"
@@ -14,8 +15,8 @@ class Dashboard():
     members = "au.geekseat.com.hub3candroid:id/textLinkMembers"
     invite_member = "au.geekseat.com.hub3candroid:id/textLinkInviteMembers"
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        super().__init__()
 
     def verified_all_element(self):
         try:

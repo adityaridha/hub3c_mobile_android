@@ -2,9 +2,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from page.base_page import Page
 
 
-class Feature():
+
+class Feature(Page):
 
     business = "//*[@text='Business network']"
     job2job = "au.geekseat.com.hub3candroid:id/sideNavJob2job"
@@ -14,8 +16,8 @@ class Feature():
     arrow_nav = "(//*[@id='sideNavHeader']/*[@class='android.widget.ImageView'])[2]"
     cancel = "au.geekseat.com.hub3candroid:id/edit_cancel"
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        super().__init__()
 
     def tap_business_network(self):
         pass

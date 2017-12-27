@@ -2,17 +2,17 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from appium import webdriver
+from page.base_page import Page
 import pytest
 import time
 
 
-class SwitchAccount():
+class SwitchAccount(Page):
 
     header = "//*[@text='Please select your desired account to be switched:']"
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        super().__init__()
 
     def select_business_nama(self, business):
         try:

@@ -11,8 +11,7 @@ parent_directory = os.getcwd()
 failed_screenshot_dir = parent_directory + "\\screenshot\\failed_test\\"
 success_screenshot_dir = parent_directory + "\\screenshot\\success_test\\"
 
-conn = Connection()
-driver = conn.driver()
+driver = Connection.driver
 
 @pytest.fixture()
 def reset_app():
