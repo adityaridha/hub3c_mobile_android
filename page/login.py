@@ -2,25 +2,23 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from util import StepHelper
+from page.base_page import Page
 import pytest
 
 
-
-class Login():
+class Login(Page):
 
     username_id = (By.ID, 'au.geekseat.com.hub3candroid:id/textUsername')
     password_id = (By.ID, 'au.geekseat.com.hub3candroid:id/textPassword')
     sign_in_button = (By.ID, 'au.geekseat.com.hub3candroid:id/buttonLogin')
-    register_forgot_password = "au.geekseat.com.hub3candroid:id/textForgotPassword"
+    register_forgot_password = (By.ID, "au.geekseat.com.hub3candroid:id/textForgotPassword")
     hub3c_logo = (By.CLASS_NAME, "android.widget.ImageView")
 
-
-    def __init__(self, driver):
-        self.driver = driver
-        self.step_helper = StepHelper(driver)
+    def __init__(self):
+        super().__init__()
 
     def verified_all_element(self):
+
         try:
             self.driver.find_element_by_id(self.username_id)
             self.driver.find_element_by_id(self.password_id)
@@ -30,35 +28,30 @@ class Login():
     def login(self, email, password):
         self.driver.launch_app()
         try:
-           logo = WebDriverWait(self.driver, 10).until(ec.presence_of_element_located(self.username_id))
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located(self.username_id))
         except TimeoutException:
             print("element not ready")
 
-        self.step_helper.find_element(self.username_id).send_keys(email)
-        self.step_helper.find_element(self.password_id).send_keys(password)
-        self.step_helper.find_element(self.sign_in_button).click()
+        self.find_element(self.username_id).send_keys(email)
+        self.find_element(self.password_id).send_keys(password)
+        self.find_element(self.sign_in_button).click()
 
     def input_email(self, email):
         try:
-            WebDriverWait(self.driver, 20).until(ec.presence_of_element_located((By.ID, self.username_id)))
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located(self.username_id))
         except TimeoutException:
             print("element not ready")
-        email_el = self.driver.find_element_by_id(self.username_id)
-        email_el.send_keys(email)
+        self.find_element(self.username_id).send_keys(email)
 
     def input_password(self, password):
         try:
-            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.register_forgot_password)))
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located(self.password_id))
         except TimeoutException:
             print("element not ready")
-        password_el = self.driver.find_element_by_id(self.password_id)
-        password_el.send_keys(password)
+        self.find_element(self.password_id).send_keys(password)
 
     def tap_sign_in(self):
-        self.driver.find_element_by_id(self.sign_in_button).click()
-
-    def is_login_success(self):
-        pass
+        self.find_element(self.sign_in_button).click()
 
     def tap_registration(self):
         try:

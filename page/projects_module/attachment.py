@@ -17,19 +17,17 @@ class Attachment():
     add_attachment_button = (By.ID, "au.geekseat.com.hub3candroid:id/fab")
     load_more_button = (By.ID, "au.geekseat.com.hub3candroid:id/btn_view_all")
 
-    ''' option more button '''
-
+    '''option more button'''
     more_attachment_name = "au.geekseat.com.hub3candroid:id/text_tittle"
     attachment_download = "au.geekseat.com.hub3candroid:id/btn_download"
     attachment_edit = (By.ID, "au.geekseat.com.hub3candroid:id/btn_edit")
     attachment_delete = (By.ID, "au.geekseat.com.hub3candroid:id/btn_delete")
 
-    ''' recent attachement '''
-
+    '''recent attachement '''
     recent_file = (By.XPATH, "//*[@resource-id='android:id/list']/android.widget.LinearLayout[1]")
 
 
-    ''' permission pop up'''
+    '''permission pop up'''
     permission_pop_up = (By.ID, "com.android.packageinstaller:id/permission_message")
     allow_button = (By.ID, "com.android.packageinstaller:id/permission_allow_button")
 
@@ -42,7 +40,7 @@ class Attachment():
     cancel_button = (By.XPATH, "//*[@text='Cancel']")
     allert_box = (By.ID, "au.geekseat.com.hub3candroid:id/alertTitle")
 
-    ''' massages'''
+    '''massages'''
     crouton = (By.XPATH, "/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.widget.TextView")
     successfully_upload_attachment = (By.XPATH, "//*[@text='Attachment successfully uploaded!']")
 

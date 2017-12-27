@@ -11,22 +11,21 @@ from connection import Connection
 
 directory = '%s/' % os.getcwd()
 
+# conn = Connection()
+# driver = conn.driver()
 
-driver = Connection.driver
-
-login = page.Login(driver)
-dashboard = page.Dashboard(driver)
-navbar = page.Navbar(driver)
-feature_menu = page.Feature(driver)
-user_profile = page.UserProfile(driver)
-switch_account = page.SwitchAccount(driver)
+login = page.Login()
+# dashboard = page.Dashboard(driver)
+# navbar = page.Navbar(driver)
+# feature_menu = page.Feature(driver)
+# user_profile = page.UserProfile(driver)
+# switch_account = page.SwitchAccount(driver)
 
 
 @pytest.mark.usefixtures("reset_app")
 class TestLogin():
 
     def test_login_wrong_password(self):
-        driver.launch_app()
         login.input_email("transsystem@mailinator.com")
         login.input_password("this is password")
         login.tap_sign_in()
