@@ -1,8 +1,5 @@
 {
-  "test_cases/test_project.py::TestProject::()::test_create_project_all_form_filled": true,
-  "test_cases/test_project.py::TestProject::()::test_create_project_minimum_req": true,
-  "test_cases/test_project.py::TestProject::()::test_create_project_with_two_project_owner": true,
-  "test_cases/test_project.py::TestProject::()::test_create_project_with_unidentified_team_member": true,
-  "test_cases/test_project.py::TestProject::()::test_delete_project": true,
-  "test_cases/test_project.py::TestProject::()::test_edit_project": true
+  "test_cases/test_login.py::TestLogin::()::test_forgot_password": true,
+  "test_cases/test_login.py::TestLogin::()::test_login_logout": true,
+  "test_cases/test_login.py::TestLogin::()::test_login_logout_multiple_business": true
 }

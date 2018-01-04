@@ -7,6 +7,8 @@ from util import StepHelper
 import pytest
 import time
 
+'''tambah archive action'''
+
 
 class ProjectList():
 
@@ -26,9 +28,13 @@ class ProjectList():
     archived_list = "//*[@text='ARCHIVED']"
     el_edit_project_id = "au.geekseat.com.hub3candroid:id/btn_edit"
     el_delete_project_id = "au.geekseat.com.hub3candroid:id/btn_delete"
+    el_archive_project_id = ""
     el_del_confirmation = "//*[@text='Deleting project will remove this project from list and turn off all notification. Do you want to continue?']"
     el_yes_button_for_delete_id = "android:id/button1"
-    crouton_successfull_delete = "//*[@text='Project is successfully deleted']"
+    el_archive_confirmation = ""
+    el_yes_button_for_archive = ""
+    crouton_successful_delete = "//*[@text='Project is successfully deleted']"
+    crouton_successful_archive = ""
     project_title = (By.ID, "au.geekseat.com.hub3candroid:id/title")
 
     def __init__(self, driver):
@@ -82,17 +88,42 @@ class ProjectList():
 
     def verified_delete_project(self):
         try:
-            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.XPATH, self.crouton_successfull_delete)))
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.XPATH, self.crouton_successful_delete)))
             print("Delete success")
         except TimeoutException:
             print("Delete failed")
             pytest.fail()
 
     def tap_project_title(self):
-
         title = self.step_helper.find_element(self.project_title)
         title.click()
 
+
+
+    '''ARCHIVE ACTION'''
+
+    def tap_archive_button(self):
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.el_archive_project_id)))
+        except TimeoutException:
+            print("Archive project not ready")
+        self.driver.find_element_by_id(self.el_archive_project_id).click()
+
+    def proceed_archive_action(self):
+        try :
+            WebDriverWait(self.driver,10).until(ec.presence_of_element_located((By.XPATH,self.el_archive_confirmation)))
+            self.driver.find_element_by_id(self.el_yes_button_for_archive).click()
+        except TimeoutException:
+            print("Archive confirmation not appear")
+            pytest.fail()
+
+    def verified_archive_project(self):
+        try:
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.XPATH, self.crouton_successful_archive)))
+            print("Archive success")
+        except TimeoutException:
+            print("Archive failed")
+            pytest.fail()
 
 
 
