@@ -9,7 +9,7 @@ import pytest
 class UserProfile(Page):
 
 
-    logout = "au.geekseat.com.hub3candroid:id/buttonLogout"
+    logout = (By.ID, "au.geekseat.com.hub3candroid:id/buttonLogout")
     switch_account = "au.geekseat.com.hub3candroid:id/buttonSwitch"
     edit = "au.geekseat.com.hub3candroid:id/action_edit"
     back = "//*[@contentDescription='Navigate up']"
@@ -19,7 +19,7 @@ class UserProfile(Page):
 
     def verified_all_element(self):
         try:
-            WebDriverWait(self.driver, 30).until(ec.presence_of_element_located((By.ID, self.logout)))
+            WebDriverWait(self.driver, 30).until(ec.presence_of_element_located(self.logout))
             WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, self.switch_account)))
             WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.ID, self.edit)))
             print("Dadshboard page is compleately loaded")
@@ -27,4 +27,4 @@ class UserProfile(Page):
             print("element not ready")
 
     def tap_logout(self):
-        self.driver.find_element_by_id(self.logout).click()
+        self.find_element(self.logout).click()

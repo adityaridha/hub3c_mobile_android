@@ -5,6 +5,7 @@ from pathlib import Path
 root = Path(__file__).parents[1]   #get the root directory
 root_model = str(root)
 sys.path.append(root_model)
+print(sys.path)
 import page
 
 directory = '%s/' % os.getcwd()
@@ -15,6 +16,7 @@ navbar = page.Navbar()
 feature_menu = page.Feature()
 user_profile = page.UserProfile()
 switch_account = page.SwitchAccount()
+forgt_pass = page.ForgotPassword()
 
 
 @pytest.mark.usefixtures("reset_app")
@@ -60,10 +62,15 @@ class TestLogin():
         feature_menu.tap_header()
         user_profile.tap_logout()
 
-    # def test_forgot_password(self):
-    #     driver.launch_app()
-    #     login.tap_forgot_password()
-    #     time.sleep(3)
+    def test_forgot_password(self):
+        login.verified_all_element()
+        login.tap_forgot_password()
+        forgt_pass.verify_page()
+        forgt_pass.input_email("mobile.testing@mailinator.com")
+        forgt_pass.click_reset_button()
+        forgt_pass.verify_success_message()
+        login.verified_all_element(reset=False)
+
     #
     # def test_registration(self):
     #     driver.launch_app()

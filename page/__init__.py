@@ -1,4 +1,5 @@
 from page.login import *
+from page.forgot_password import *
 from page.dashboard import *
 from page.navigation_bar import *
 from page.feature_menu import *

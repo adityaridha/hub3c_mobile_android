@@ -8,13 +8,13 @@ from page.base_page import Page
 
 class Feature(Page):
 
-    business = "//*[@text='Business network']"
-    job2job = "au.geekseat.com.hub3candroid:id/sideNavJob2job"
-    project = "//*[@text='Projects']"
-    profile_picture = "au.geekseat.com.hub3candroid:id/imageProfile"
+    business = (By.ID, "au.geekseat.com.hub3candroid:id/sideNavBusiness")
+    job2job = (By.ID, "au.geekseat.com.hub3candroid:id/sideNavJob2job")
+    project_id = (By.ID, "au.geekseat.com.hub3candroid:id/sideProject")
+    profile_picture = (By.ID, "au.geekseat.com.hub3candroid:id/imageProfile")
     header = "au.geekseat.com.hub3candroid:id/containerSideNavHeader"
     arrow_nav = "(//*[@id='sideNavHeader']/*[@class='android.widget.ImageView'])[2]"
-    cancel = "au.geekseat.com.hub3candroid:id/edit_cancel"
+    cancel = (By.ID, "au.geekseat.com.hub3candroid:id/edit_cancel")
 
     def __init__(self):
         super().__init__()
@@ -23,25 +23,16 @@ class Feature(Page):
         pass
 
     def tap_projects(self):
-        try:
-            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.XPATH, self.project)))
-            self.driver.find_element_by_xpath(self.project).click()
-        except TimeoutException:
-            print("Project module not found")
+        self.find_element(self.project_id).click()
 
     def tap_job2job(self):
-        pass
+        self.find_element(self.job2job).click()
 
     def tap_header(self):
-
-        try:
-            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.profile_picture)))
-            self.driver.find_element_by_id(self.profile_picture).click()
-        except TimeoutException:
-            print("element not ready")
+        self.find_element(self.profile_picture).click()
 
     def tap_arrow_nav(self):
-        pass
+        self.driver.find_element()
 
     def tap_cencel(self):
         pass

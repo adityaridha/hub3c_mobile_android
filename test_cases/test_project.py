@@ -11,19 +11,20 @@ from util import utility
 
 driver = Connection.driver
 
-login = page.Login(driver)
-dashboard = page.Dashboard(driver)
-navbar = page.Navbar(driver)
-feature_menu = page.Feature(driver)
+login = page.Login()
+dashboard = page.Dashboard()
+navbar = page.Navbar()
+feature_menu = page.Feature()
 project = page.ProjectList(driver)
-create_project = page.CreateNewProject(driver)
+create_project = page.CreateNewProject()
 edit_project = page.EditProject(driver)
 util = utility.StepHelper(driver)
 
-@pytest.mark.usefixtures("reset_app")
+# @pytest.mark.usefixtures("reset_app")
 class TestProject():
 
     def test_create_project_minimum_req(self):
+        login.verified_all_element()
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
         navbar.tap_feature_menu()
@@ -38,6 +39,7 @@ class TestProject():
         create_project.handle_activity_validation()
 
     def test_create_project_with_unidentified_team_member(self):
+        login.verified_all_element()
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
         navbar.tap_feature_menu()
@@ -73,6 +75,7 @@ class TestProject():
 
     # @pytest.mark.skip
     def test_create_project_all_form_filled(self):
+        login.verified_all_element()
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
         navbar.tap_feature_menu()
@@ -115,6 +118,7 @@ class TestProject():
         create_project.tap_complete()
 
     def test_create_project_with_two_project_owner(self):
+        login.verified_all_element()
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
         navbar.tap_feature_menu()
@@ -159,6 +163,7 @@ class TestProject():
 
 
     def test_edit_project(self):
+        login.verified_all_element()
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
         navbar.tap_feature_menu()
@@ -177,6 +182,7 @@ class TestProject():
 
 
     def test_delete_project(self):
+        login.verified_all_element()
         login.login(email="transsystem@mailinator.com", password="ZXasqw12")
         dashboard.verified_all_element()
         navbar.tap_feature_menu()

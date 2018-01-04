@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from page.base_page import Page
 import datetime
 import pytz
 import time
@@ -12,7 +13,7 @@ from util import utility
 raw_date= str(datetime.datetime.now(pytz.timezone('Asia/Jakarta')))
 date = raw_date[0:-13]
 
-class CreateNewProject():
+class CreateNewProject(Page):
 
 
     form_title = "//*[@text='New Project: Overview']"
@@ -67,8 +68,8 @@ class CreateNewProject():
     cancel = "au.geekseat.com.hub3candroid:id/btn_cancel"
     activity_validation = "android:id/message"
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        super().__init__()
         self.util = utility.StepHelper(self.driver)
 
     def verified_form(self):
@@ -135,7 +136,7 @@ class CreateNewProject():
             print("Team member page not ready")
         team_member_name_el = self.driver.find_element_by_id(self.team_member_name)
         team_member_name_el.send_keys(teamm_ember_name)
-        self.util.tap_first_result_auto_complete(team_member_name_el)
+        self.tap_first_result_auto_complete(team_member_name_el)
         # self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/title").click()
 
     def set_project_role(self):
@@ -183,7 +184,7 @@ class CreateNewProject():
     def select_activity_type(self):
         activity_type = self.driver.find_element_by_id(self.activity_type)
         activity_type.click()
-        self.util.tap_first_result_auto_complete(activity_type)
+        self.tap_first_result_auto_complete(activity_type)
         time.sleep(1)
 
     def set_schedule_start(self):

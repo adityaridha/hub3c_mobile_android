@@ -2,7 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from appium import webdriver
+from page.base_page import Page
 from util import utility
 import pytest
 import time
@@ -12,7 +12,7 @@ import pytz
 raw_date= str(datetime.datetime.now(pytz.timezone('Asia/Jakarta')))
 date = raw_date[0:-13]
 
-class EditProject():
+class EditProject(Page):
 
     el_project_name_id = "au.geekseat.com.hub3candroid:id/edit_project_name"
     el_project_code_id = "au.geekseat.com.hub3candroid:id/edit_project_code"
@@ -30,7 +30,7 @@ class EditProject():
     el_cancel_button_id = "au.geekseat.com.hub3candroid:id/btn_cancel"
 
     def __init__(self, driver):
-        self.driver = driver
+        super().__init__()
         self.util = utility.StepHelper(driver=self.driver)
 
     def edit_project_name(self):
@@ -56,12 +56,12 @@ class EditProject():
     def edit_currency(self):
         currency_el = self.driver.find_element_by_id(self.el_currency_id)
         print(currency_el.text)
-        self.util.tap_spinner_options(spinner=currency_el, index=2)
+        self.tap_spinner_options(spinner=currency_el, index=2)
         print("Edit currency")
 
     def edit_project_status(self):
         status_el = self.driver.find_element_by_id(self.el_project_status_id)
-        self.util.tap_spinner_options(spinner=status_el, index=3)
+        self.tap_spinner_options(spinner=status_el, index=3)
 
     def edit_proposed_start(self):
         self.driver.find_element_by_id(self.el_proposed_start_id).click()

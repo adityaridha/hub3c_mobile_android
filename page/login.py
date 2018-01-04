@@ -58,10 +58,6 @@ class Login(Page):
         self.driver.tap(positions)
 
     def tap_forgot_password(self):
-        try:
-            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.username_field)))
-        except TimeoutException:
-            print("element not ready")
 
         forgot_pass =  self.driver.find_element_by_id('au.geekseat.com.hub3candroid:id/textForgotPassword')
         x = forgot_pass.location['x']
@@ -72,7 +68,7 @@ class Login(Page):
         positions = []
         positions.append((x + width - 20, y))
         positions.append((x + width - 10, y))
-        print(positions)
+        print("click forgot password")
         self.driver.tap(positions)
 
     def verify_login_is_failed(self):
