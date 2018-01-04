@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException
 import pytest
+import time
 
 
 
@@ -41,7 +42,7 @@ class Page(object):
         spinner.click()
         self.tap_first_result_auto_complete(element=spinner, index=index)
 
-    def swipe_to_buttom(self):
+    def swipe_to_button(self):
         time.sleep(1)
         try:
             self.driver.swipe(522, 800, 495, 100, 1000)
