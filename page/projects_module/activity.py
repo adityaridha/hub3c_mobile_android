@@ -31,4 +31,6 @@ class Activity(Page):
         super().__init__()
 
     def tap_add_activity_button(self):
+        ''' handle load asignee that take too long'''
+        time.sleep(2)
         self.find_element(self.add_activity).click()

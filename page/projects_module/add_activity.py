@@ -1,8 +1,5 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
-from selenium.common.exceptions import TimeoutException, NoSuchElementException
-from page import Page
+from page import Page, Calendar
 import datetime
 import pytz
 import time
@@ -12,6 +9,7 @@ from util import utility
 
 raw_date= str(datetime.datetime.now(pytz.timezone('Asia/Jakarta')))
 date = raw_date[0:-13]
+calendar = Calendar()
 
 class AddActivity(Page):
     activity_parent = (By.ID, "au.geekseat.com.hub3candroid:id/spinner_parent_activity")
@@ -46,15 +44,12 @@ class AddActivity(Page):
     def __init__(self):
         super().__init__()
 
-    def input_activity_subject(self, subject):
-        self.find_element(self.activity_subject).send_keys(subject)
-
     def select_type(self):
         type = self.find_element(self.activity_type)
         self.tap_spinner_options(spinner=type, index=2)
 
-    def tap_proposed_start_date(self):
-        self.find_element(self.activity_proposed_start_date).click()
+    def input_activity_subject(self, subject="Activity Subject Default"):
+        self.find_element(self.activity_subject).send_keys(subject)
 
     def input_description(self):
         self.find_element(self.activity_description).send_keys("description")
@@ -63,101 +58,36 @@ class AddActivity(Page):
         self.find_element(self.activity_budget).send_keys("900")
 
     def input_budget_hours(self):
+        self.swipe_to_bottom(target_element=self.activity_budget_hours)
         self.find_element(self.activity_budget_hours).send_keys("999")
 
+    def select_sequence(self):
+        sequence = self.find_element(self.activity_sequence)
+        self.tap_spinner_options(spinner=sequence, index=1)
 
-    def verify_form(self):
-        try:
-            WebDriverWait(self.driver, 5).until(ec.presence_of_element_located((By.XPATH, self.form_title)))
-            WebDriverWait(self.driver, 2).until(ec.presence_of_element_located((By.ID, self.activity_parent)))
-            print("Create activity is ready")
-        except TimeoutException:
-            print("Create activity is not ready")
+    def select_asignee(self):
+        self.swipe_to_bottom(target_element=self.activity_assignee)
+        asignee = self.find_element(self.activity_assignee)
+        self.tap_spinner_options(spinner=asignee, index=1)
 
-    def select_activity_type(self):
-        activity_type = self.driver.find_element_by_id(self.activity_type)
-        activity_type.click()
-        self.util.tap_first_result_auto_complete(activity_type)
-        time.sleep(1)
+    def select_priority(self):
+        priority = self.find_element(self.activity_priority)
+        self.tap_spinner_options(spinner=priority, index=2)
 
-    def select_activity_sequence(self):
-        activity_sequence = self.driver.find_element_by_id(self.activity_sequence)
-        activity_sequence.click()
-        self.util.tap_first_result_auto_complete(activity_sequence)
-        time.sleep(1)
+    def tap_proposed_start_date(self):
+        self.find_element(self.activity_proposed_start_date).click()
 
-    def input_activity_assignee(self):
-        activity_assignee = self.driver.find_element_by_id(self.activity_assignee)
-        activity_assignee.click()
-        self.util.tap_first_result_auto_complete(activity_assignee)
+    def tap_add_activity_button(self):
+        self.swipe_to_bottom(target_element=self.add_activity_button)
+        self.find_element(self.add_activity_button).click()
 
-    def select_activity_status(self):
-        activity_status = self.driver.find_element_by_id(self.activity_status)
-        activity_status.click()
-        self.util.tap_first_result_auto_complete(activity_status)
-        time.sleep(1)
-
-    def select_activity_priority(self):
-        activity_priority = self.driver.find_element_by_id(self.activity_priority)
-        activity_priority.click()
-        self.util.tap_first_result_auto_complete(activity_priority)
-        time.sleep(1)
-
-    def input_activity_desc(self):
-        self.driver.find_element_by_id(self.activity_description).send_keys("This activity is from automation")
-
-    def set_proposed_start_date(self):
-        self.driver.find_element_by_id(self.activity_proposed_start_date).click()
-        time.sleep(1)
-
-        # PILIH HARI?
-
-        self.driver.find_element_by_xpath("//*[@text='2018']").click()  # harus diganti locator nya
-
-        # //*[@contentDescription='2018']
-        self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
-
-    def set_proposed_start_time(self):
-        self.driver.find_element_by_id(self.activity_proposed_start_time).click()
-        time.sleep(1)
-
-        # PILIH JAM?
-
-        self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
+    def set_proposed_finish_date(self):
+        self.swipe_to_bottom(target_element=self.activity_proposed_finish_date)
+        self.find_element(self.activity_proposed_finish_date).click()
+        calendar.select_date(mode="past")
 
 
-    def set_actual_start_date(self):
-        self.driver.find_element_by_id(self.activity_actual_start_date).click()
-        time.sleep(1)
 
-        # PILIH HARI?
 
-        self.driver.find_element_by_xpath("//*[@text='2018']").click()
-        # //*[@contentDescription='2018']
-        self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
 
-    def set_actual_start_time(self):
-        self.driver.find_element_by_id(self.activity_actual_start_time).click()
-        time.sleep(1)
-
-        # PILIH JAM?
-
-        self.driver.find_element_by_id("au.geekseat.com.hub3candroid:id/ok").click()
-
-    def set_is_billable(self):
-        self.driver.find_element_by_id(self.activity_is_billable).click()
-
-    def set_is_complete(self):
-        self.driver.find_element_by_id(self.activity_mark_completed).click()
-
-    def tap_add_activity(self):
-        self.driver.find_element_by_id(self.add_activity_button).click()
-
-    def verify_activity(self):
-        try:
-            WebDriverWait(self.driver, 2).until(ec.presence_of_all_elements_located((By.XPATH, self.success_message)))
-            print("Add Activity is successful")
-        except TimeoutException:
-            print("Add Activity is unsuccessful")
-            pytest.fail()
 

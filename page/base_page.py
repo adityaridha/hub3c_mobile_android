@@ -2,7 +2,9 @@ from connection import Connection
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException
+from appium.webdriver.common.touch_action import TouchAction
 import pytest
+import time
 
 
 
@@ -19,17 +21,16 @@ class Page(object):
             return result
         except TimeoutException:
             print("This element couldn't be found : {} ".format(element))
-            pytest.fail()
+            return None
 
     def tap_first_result_auto_complete(self, element, index=1):
-        print(index)
         x = element.location['x']
         y = element.location['y']
         height = element.size['height']
         width = element.size['width']
         target_x = x + (int(width/2))
-        target_y1 = y + height + (40*index)
-        target_y2 = y + height + (50*index)
+        target_y1 = y + height + (30*index)
+        target_y2 = y + height + (40*index)
 
         suggestion_cord = []
         suggestion_cord.append((target_x, target_y1))
@@ -41,13 +42,35 @@ class Page(object):
         spinner.click()
         self.tap_first_result_auto_complete(element=spinner, index=index)
 
-    def swipe_to_buttom(self):
-        time.sleep(1)
-        try:
-            self.driver.swipe(522, 800, 495, 100, 1000)
-            print("swipe success")
-        except :
-            print("swipe failed")
+    def swipe_to_bottom(self, target_element=None):
+
+        # asus y2 = -100
+
+        if target_element == None :
+            try:
+                self.driver.swipe(350, 700, 350, 50, 1000)
+                print("swipe success")
+            except :
+                print("swipe failed")
+
+        else:
+
+            print("Swipe to element : {}".format(target_element))
+
+            n = 4
+            while n > 0 :
+                print("searching...")
+                is_element_visible = self.find_element(target_element, time_out=1)
+                if is_element_visible == None :
+                    self.driver.swipe(350, 700, 350, 50, 1000)
+                    n = n - 1
+                    # print("swipe count : {} left".format(n))
+                else:
+                    print("Element found")
+                    return
+
+            else:
+                print("swipe 4 times but element not found")
 
 
 if __name__ == "__main__" :

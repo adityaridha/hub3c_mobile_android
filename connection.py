@@ -12,7 +12,6 @@ class Connection():
     desired_caps['appActivity'] = ".activities.SplashActivity"
     # desired_caps['noReset'] = False
     desired_caps['automationName'] = 'uiautomator2'
-    desired_caps['appiumVersion'] = '1.6.5'
 
     # driver =  webdriver.Remote('http://192.168.154.2:4444/wd/hub', desired_capabilities=desired_caps)
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_capabilities=desired_caps)

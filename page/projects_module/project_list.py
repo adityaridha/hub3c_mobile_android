@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
+from page.base_page import Page
 from appium import webdriver
 from util import StepHelper
 import pytest
@@ -10,7 +11,7 @@ import time
 '''tambah archive action'''
 
 
-class ProjectList():
+class ProjectList(Page):
 
     create_project = "au.geekseat.com.hub3candroid:id/fab"  # generic floating button id
     project_on_top = "au.geekseat.com.hub3candroid:id/title"  # generic project id
@@ -37,9 +38,8 @@ class ProjectList():
     crouton_successful_archive = ""
     project_title = (By.ID, "au.geekseat.com.hub3candroid:id/title")
 
-    def __init__(self, driver):
-        self.driver = driver
-        self.step_helper = StepHelper(driver)
+    def __init__(self):
+        super().__init__()
 
     def verify_success_access_project(self):
         try:
@@ -95,9 +95,7 @@ class ProjectList():
             pytest.fail()
 
     def tap_project_title(self):
-        title = self.step_helper.find_element(self.project_title)
-        title.click()
-
+        self.find_element(self.project_title).click()
 
 
     '''ARCHIVE ACTION'''

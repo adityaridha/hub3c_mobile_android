@@ -5,7 +5,6 @@ from pathlib import Path
 root = Path(__file__).parents[1]   #get the root directory
 root_model = str(root)
 sys.path.append(root_model)
-print(sys.path)
 import page
 
 directory = '%s/' % os.getcwd()
@@ -29,47 +28,47 @@ class TestLogin():
         login.tap_sign_in()
         login.verify_login_is_failed()
 
-    def test_login_failed3x(self):
-        login.verified_all_element()
-        login.input_email("transsystem@mailinator.com")
-        login.input_password("this is password")
-        login.tap_sign_in()
-        login.verify_login_is_failed()
-        login.input_password("this is password 2")
-        login.tap_sign_in()
-        login.verify_login_is_failed()
-        login.input_password("this is password 3")
-        login.tap_sign_in()
-        login.verify_login_is_failed()
-
-    def test_login_logout(self):
-        login.verified_all_element()
-        login.input_email("transsystem@mailinator.com")
-        login.input_password("ZXasqw12")
-        login.tap_sign_in()
-        dashboard.verified_all_element()
-        navbar.tap_feature_menu()
-        feature_menu.tap_header()
-        user_profile.tap_logout()
-        login.verified_all_element(reset=False)
-
-    def test_login_logout_multiple_business(self):
-        login.verified_all_element()
-        login.login(email="mobile.testing@mailinator.com", password="ZXasqw12")
-        switch_account.select_business_nama(business="Trans System")
-        dashboard.verified_all_element()
-        navbar.tap_feature_menu()
-        feature_menu.tap_header()
-        user_profile.tap_logout()
-
-    def test_forgot_password(self):
-        login.verified_all_element()
-        login.tap_forgot_password()
-        forgt_pass.verify_page()
-        forgt_pass.input_email("mobile.testing@mailinator.com")
-        forgt_pass.click_reset_button()
-        forgt_pass.verify_success_message()
-        login.verified_all_element(reset=False)
+    # def test_login_failed3x(self):
+    #     login.verified_all_element()
+    #     login.input_email("transsystem@mailinator.com")
+    #     login.input_password("this is password")
+    #     login.tap_sign_in()
+    #     login.verify_login_is_failed()
+    #     login.input_password("this is password 2")
+    #     login.tap_sign_in()
+    #     login.verify_login_is_failed()
+    #     login.input_password("this is password 3")
+    #     login.tap_sign_in()
+    #     login.verify_login_is_failed()
+    #
+    # def test_login_logout(self):
+    #     login.verified_all_element()
+    #     login.input_email("transsystem@mailinator.com")
+    #     login.input_password("ZXasqw12")
+    #     login.tap_sign_in()
+    #     dashboard.verified_all_element()
+    #     navbar.tap_feature_menu()
+    #     feature_menu.tap_header()
+    #     user_profile.tap_logout()
+    #     login.verified_all_element(reset=False)
+    #
+    # def test_login_logout_multiple_business(self):
+    #     login.verified_all_element()
+    #     login.login(email="mobile.testing@mailinator.com", password="ZXasqw12")
+    #     switch_account.select_business_nama(business="Trans System")
+    #     dashboard.verified_all_element()
+    #     navbar.tap_feature_menu()
+    #     feature_menu.tap_header()
+    #     user_profile.tap_logout()
+    #
+    # def test_forgot_password(self):
+    #     login.verified_all_element()
+    #     login.tap_forgot_password()
+    #     forgt_pass.verify_page()
+    #     forgt_pass.input_email("mobile.testing@mailinator.com")
+    #     forgt_pass.click_reset_button()
+    #     forgt_pass.verify_success_message()
+    #     login.verified_all_element(reset=False)
 
     #
     # def test_registration(self):

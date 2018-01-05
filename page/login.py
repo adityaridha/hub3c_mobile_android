@@ -14,6 +14,7 @@ class Login(Page):
     reg_forgot_password = (By.ID, "au.geekseat.com.hub3candroid:id/textForgotPassword")
     hub3c_logo = (By.CLASS_NAME, "android.widget.ImageView")
     login_failed_text = (By.XPATH, "//*[@text='Wrong Email or Password']")
+    username = By.ID, 'au.geekseat.com.hub3candroid:id/textUsername'
 
     def __init__(self):
         super().__init__()

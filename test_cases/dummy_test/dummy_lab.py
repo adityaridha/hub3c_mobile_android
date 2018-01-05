@@ -5,7 +5,11 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 import pytest
 
 
-element = (By.XPATH, "asal")
+element = (By.XPATH, "wow")
 
 print(element)
-print(element[0])
+
+baru = []
+baru.append("yeye")
+
+print(baru)
