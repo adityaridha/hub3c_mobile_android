@@ -9,8 +9,8 @@ import time
 
 class ActivityTimesheet():
 
-    timesheet_title = "au.geekseat.com.hub3candroid:id/tv_tittle"
-    timesheet_progress_bar = "au.geekseat.com.hub3candroid:id/materialProgress"
-    timesheet_progress = "au.geekseat.com.hub3candroid:id/tv_text_progress"
-    timesheet_hours_spent = "au.geekseat.com.hub3candroid:id/tv_hour_spent"
-    timesheet_budget_hours = "au.geekseat.com.hub3candroid:id/tv_complete_progress"
+    timesheet_title = (By.ID, "au.geekseat.com.hub3candroid:id/tv_tittle")
+    timesheet_progress_bar = (By.ID, "au.geekseat.com.hub3candroid:id/materialProgress")
+    timesheet_progress = (By.ID, "au.geekseat.com.hub3candroid:id/tv_text_progress")
+    timesheet_hours_spent = (By.ID, "au.geekseat.com.hub3candroid:id/tv_hour_spent")
+    timesheet_budget_hours = (By.ID, "au.geekseat.com.hub3candroid:id/tv_complete_progress")

@@ -8,13 +8,13 @@ import time
 
 
 class ActivityTimesheetDetails():
-    activity_title = "au.geekseat.com.hub3candroid:id/text_tittle"
-    activity_assignee = "au.geekseat.com.hub3candroid:id/text_name"
-    timesheet_hours = "au.geekseat.com.hub3candroid:id/text_hour"
-    timesheet_created_date = "au.geekseat.com.hub3candroid:id/text_date"
-    timesheet_more_button = "au.geekseat.com.hub3candroid:id/ib_action_more"
+    activity_title = (By.ID, "au.geekseat.com.hub3candroid:id/text_tittle")
+    activity_assignee = (By.ID, "au.geekseat.com.hub3candroid:id/text_name")
+    timesheet_hours = (By.ID, "au.geekseat.com.hub3candroid:id/text_hour")
+    timesheet_created_date = (By.ID, "au.geekseat.com.hub3candroid:id/text_date")
+    timesheet_more_button = (By.ID, "au.geekseat.com.hub3candroid:id/ib_action_more")
 
 
     '''opsi more button'''
-    edit_timesheet = "au.geekseat.com.hub3candroid:id/btn_edit"
-    delete_timesheet = "au.geekseat.com.hub3candroid:id/btn_delete"
+    edit_timesheet = (By.ID, "au.geekseat.com.hub3candroid:id/btn_edit")
+    delete_timesheet = (By.ID, "au.geekseat.com.hub3candroid:id/btn_delete")

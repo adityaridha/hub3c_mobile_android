@@ -42,6 +42,7 @@ class Page(object):
         spinner.click()
         self.tap_first_result_auto_complete(element=spinner, index=index)
 
+
     def swipe_to_bottom(self, target_element=None):
 
         # asus y2 = -100
@@ -71,7 +72,6 @@ class Page(object):
 
             else:
                 print("swipe 4 times but element not found")
-
 
 if __name__ == "__main__" :
     pass

@@ -28,7 +28,7 @@ class Login(Page):
             self.find_element(self.sign_in_button)
             print("Login page successfully loaded")
         except TimeoutException:
-            pytest.fail("Login Page Not Successfully loaded")
+            pytest.fail("Login Page not Successfully loaded")
 
     def login(self, email, password):
         self.find_element(self.username_field).send_keys(email)
@@ -46,11 +46,11 @@ class Login(Page):
 
     def tap_registration(self):
         try:
-            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located((By.ID, self.reg_forgot_password)))
+            WebDriverWait(self.driver, 10).until(ec.presence_of_element_located(self.reg_forgot_password))
         except TimeoutException:
             print("element not ready")
 
-        register =  self.driver.find_element_by_id(self.reg_forgot_password)
+        register =  self.driver.find_element(self.reg_forgot_password)
         x = register.location['x']
         y = register.location['y']
         positions = []

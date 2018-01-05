@@ -10,10 +10,10 @@ import time
 class Navbar(Page):
 
 
-    dashboard = "au.geekseat.com.hub3candroid:id/tab_dashboard"
-    business_profile = "au.geekseat.com.hub3candroid:id/tab_business"
-    team_member = "au.geekseat.com.hub3candroid:id/tab_member"
-    business_network = "au.geekseat.com.hub3candroid:id/tab_business_network"
+    dashboard = (By.ID, "au.geekseat.com.hub3candroid:id/tab_dashboard")
+    business_profile = (By.ID, "au.geekseat.com.hub3candroid:id/tab_business")
+    team_member = (By.ID, "au.geekseat.com.hub3candroid:id/tab_member")
+    business_network = (By.ID, "au.geekseat.com.hub3candroid:id/tab_business_network")
     features = (By.ID, "au.geekseat.com.hub3candroid:id/tab_profile")
 
     def __init__(self):
