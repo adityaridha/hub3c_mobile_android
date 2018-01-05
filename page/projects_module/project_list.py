@@ -29,13 +29,13 @@ class ProjectList():
     archived_list = (By.XPATH, "//*[@text='ARCHIVED']")
     el_edit_project_id = (By.ID, "au.geekseat.com.hub3candroid:id/btn_edit")
     el_delete_project_id = (By.ID, "au.geekseat.com.hub3candroid:id/btn_delete")
-    el_archive_project_id = ""
+    el_archive_project_id = (By.ID, "")
     el_del_confirmation = (By.XPATH, "//*[@text='Deleting project will remove this project from list and turn off all notification. Do you want to continue?']")
-    el_yes_button_for_delete_id = "android:id/button1"
-    el_archive_confirmation = ""
-    el_yes_button_for_archive = ""
+    el_yes_button_for_delete_id = (By.ID, "android:id/button1")
+    el_archive_confirmation = (By.ID, "")
+    el_yes_button_for_archive = (By.ID, "")
     crouton_successful_delete = (By.XPATH, "//*[@text='Project is successfully deleted']")
-    crouton_successful_archive = ""
+    crouton_successful_archive = (By.XPATH, "")
     project_title = (By.ID, "au.geekseat.com.hub3candroid:id/title")
 
     def __init__(self, driver):
